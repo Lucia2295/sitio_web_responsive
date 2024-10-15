@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        /* Estilo para el párrafo con clase .cuerpo */
+        .cuerpo {
+            column-count: 3; /* Número de columnas pantallas con 992 px o más */
+            column-gap: 20px; 
+        }
+
+        @media (max-width: 768px) {
+            .cuerpo {
+                column-count: 2; /* Número de columnas en pantallas entre 576 px y 768px*/
+            }
+        } 
+
+        @media (max-width: 576px) {
+            .cuerpo {
+                column-count: 1; /* Número de columnas en pantallas con menos de 576px */
+            }
+        }
+
+        /* Estilos para pantallas menores a 992px */
+        @media (max-width: 992px) {
+            .menu-hamburguesa {
+                display: none;
+                flex-direction: column;
+                margin-top: 10px;
+                width: 100%;
+                background-color: #343a40;
+                color: white;
+            }
+
+            .menu-hamburguesa a {
+                display: block;
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                color: white;
+                text-decoration: none;
+            }
+
+            .menu-hamburguesa a:hover {
+                background-color: #495057;
+            }
+
+            .hamburger-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+            }
+
+            .submenu {
+                display: none;
+                padding-left: 20px;
+            }
+
+            .submenu a {
+                padding: 5px 10px;
+                border-bottom: 1px solid #ddd;
+                color: white;
+            }
+        }
+
+        /* Estilos para que no se vea el menú de las tres rayas en pantallas mayores a 992 px */
+        @media (min-width: 992px) {
+            .menu-hamburguesa {
+                display: none;
+            }
+
+            .menu-horizontal {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;
+            }
+
+            .menu-horizontal a {
+                margin-right: 15px;
+            }
+
+            .search-input {
+                margin-left: auto;
+                width: 250px;
+            }
+
+            .text-white {
+                text-align: left;
+            }
+
+            h1 {
+                margin-bottom: 0;
+            }
+
+            .title-menu {
+                margin-right: 20px;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="bg-dark text-white p-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="d-flex align-items-center mb-2 mb-md-0 w-100">
+                <h1 class="mb-0 me-3 text-nowrap title-menu">LOREM IPSUM</h1>
+
+                <!-- Menú horizontal para pantallas mayores a 992px -->
+                <div class="menu-horizontal d-none d-lg-flex align-items-center">
+                    <a class="text-white" href="#">Dolor</a>
+                    <a class="text-white" href="#">Sit</a>
+                    <a class="text-white" href="#">Amet</a>
+                </div>
+
+                <!-- Campo search debe verse sólo en pantallas mayores a 992px -->
+                <input type="text" placeholder="Search" class="form-control search-input d-none d-lg-block">
+
+                <!-- Botón de menú de las tres rayas debe verse en pantallas menores a 992px -->
+                <button class="hamburger-btn d-lg-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Menú tres rayas de pantallas menores a 992px -->
+            <div class="menu-hamburguesa">
+                <input type="text" placeholder="Search" class="form-control search-input">
+                <a class="text-white" href="#">Dolor</a>
+                <a class="text-white" href="#">Sit</a>
+                <a class="text-white" href="#">Amet</a>
+                <a href="#" id="toggle-submenu" class="text-white">Más opciones</a>
+                <div class="submenu">
+                    <a class="text-white" href="#">Opción 1</a>
+                    <a class="text-white" href="#">Opción 2</a>
+                    <a class="text-white" href="#">Opción 3</a>
+                    <a class="text-white" href="#">Opción 4</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="row mt-4">
+            <nav class="col-12 col-md-3">
+                <ul class="list-group d-none d-md-block">
+                    <li class="list-group-item"><a href="#" class="nav-link">Opción 1</a></li>
+                    <li class="list-group-item"><a href="#" class="nav-link">Opción 2</a></li>
+                    <li class="list-group-item"><a href="#" class="nav-link">Opción 3</a></li>
+                    <li class="list-group-item"><a href="#" class="nav-link">Opción 4</a></li>
+                </ul>
+            </nav>
+
+            <main class="col-12 col-md-9">
+                <h2>Lorem ipsum...</h2>
+
+                <!--Carrusel para el texto aleatorio -->
+                <div id="carrusel">
+                    <p id="randomText"></p>
+                </div>
+                <!-- Cuerpo de la pantalla-->
+                <p class="cuerpo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis, tortor ac congue commodo, nisi neque bibendum elit, quis vulputate dolor augue ut mauris. tincidunt.
+                    Mauris mattis porttitor erat, in pharetra risus fringilla lobortis. Vestibulum et ante commodo, imperdiet neque ac, tempus felis. Nullam sed pharetra purus. Donec sit amet ultricies nisi.
+                    Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec lectus ligula, ultricies ut est nec, varius
+                    Phasellus eleifend semper tempor. Quisque mi lorem, laoreet eu urna sit amet, tempor volutpat est. Vestibulum lobortis nulla vel odio laoreet, iaculis rhoncus neque porttitor.
+                    In mi velit, fringilla sed velit vel, ornare varius dui. Nunc viverra diam sit amet mollis posuere. Nullam semper odio in consectetur ornare.
+                    In aliquet fringilla libero, quis dapibus massa tincidunt a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
+                    Fusce vitae enim et tellus lacinia condimentum eu at massa. Nullam laoreet, elit quis hendrerit maximus, ante sem congue lorem, vestibulum felis mauris et arcu.
+                    at
+                    Proin suscipit orci mi, ut hendrerit mi molestie nec. Donec efficitur risus erat, eu auctor massa molestie vitae.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis, tortor ac congue commodo, nisi neque bibendum elit, quis vulputate dolor augue ut mauris. tincidunt.
+                    Mauris mattis porttitor erat, in pharetra risus fringilla lobortis. Vestibulum et ante commodo, imperdiet neque ac, tempus felis. Nullam sed pharetra purus. Donec sit amet ultricies nisi.
+                    Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec lectus ligula, ultricies ut est nec, varius
+                    Phasellus eleifend semper tempor. Quisque mi lorem, laoreet eu urna sit amet, tempor volutpat est. Vestibulum lobortis nulla vel odio laoreet, iaculis rhoncus neque porttitor.
+                    In mi velit, fringilla sed velit vel, ornare varius dui. Nunc viverra diam sit amet mollis posuere. Nullam semper odio in consectetur ornare.
+                    In aliquet fringilla libero, quis dapibus massa tincidunt a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
+                    Fusce vitae enim et tellus lacinia condimentum eu at massa. Nullam laoreet, elit quis hendrerit maximus, ante sem congue lorem, vestibulum felis mauris et arcu.
+                    at
+                    Proin suscipit orci mi, ut hendrerit mi molestie nec. Donec efficitur risus erat, eu auctor massa molestie vitae.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis, tortor ac congue commodo, nisi neque bibendum elit, quis vulputate dolor augue ut mauris. tincidunt.
+                    Mauris mattis porttitor erat, in pharetra risus fringilla lobortis. Vestibulum et ante commodo, imperdiet neque ac, tempus felis. Nullam sed pharetra purus. Donec sit amet ultricies nisi.
+                    Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec lectus ligula, ultricies ut est nec, varius
+                    Phasellus eleifend semper tempor. Quisque mi lorem, laoreet eu urna sit amet, tempor volutpat est. Vestibulum lobortis nulla vel odio laoreet, iaculis rhoncus neque porttitor.
+                    In mi velit, fringilla sed velit vel, ornare varius dui. Nunc viverra diam sit amet mollis posuere. Nullam semper odio in consectetur ornare.
+                    In aliquet fringilla libero, quis dapibus massa tincidunt a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
+                    Fusce vitae enim et tellus lacinia condimentum eu at massa. Nullam laoreet, elit quis hendrerit maximus, ante sem congue lorem, vestibulum felis mauris et arcu.
+                    at
+                    Proin suscipit orci mi, ut hendrerit mi molestie nec. Donec efficitur risus erat, eu auctor massa molestie vitae.
+                </p>
+            </main>
+        </div>
+    </div>
+
+    <!-- Script para mostrar/ocultar el menú y el submenú en pantallas menores a 992px -->
+    <script>
+        $(document).ready(function () {
+            // Mostramos y ocultamos el menú tres rayas
+            $('.hamburger-btn').click(function () {
+                $('.menu-hamburguesa').slideToggle();
+            });
+
+            // Mostramos y ocultamos el submenú del menú de tres rayas, al hacer clic en "Más Opciones"
+            $('#toggle-submenu').click(function (event) {
+                event.preventDefault();
+                $('.submenu').slideToggle();
+            });
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+body {
+    background-color: #f8f9fa; /* Fondo claro */
+}
+
+header {
+    border-bottom: 3px solid #dc3545; /* Línea debajo del encabezado */
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+} 
+
+
